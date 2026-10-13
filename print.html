@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMILE Postcard &amp; Stamp QR Codes</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="icons/icon-32.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#24180E;--muted:#8A7564;--line:#F1E2CC;--cream:#FFF7EA;--amber:#FFB000;--orange:#F26A1B;--green:#1F6B3A;--pink:#EC2882;--blue:#1D5CC8}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Poppins,system-ui,sans-serif;color:var(--ink);background:var(--cream)}
+    header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;z-index:2}
+    header img{width:40px;height:40px;border-radius:50%}
+    header h1{font-size:18px;margin:0 auto 0 0}
+    label{font-size:12px;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:3px}
+    input,select{font:inherit;font-size:14px;padding:8px 10px;border:1.5px solid var(--line);border-radius:10px;min-width:0}
+    button{font:inherit;font-weight:700;border:0;border-radius:99px;padding:10px 16px;cursor:pointer;background:var(--ink);color:#fff}
+    button.alt{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+    .msg{padding:12px 16px;color:var(--muted);font-size:14px}
+    .sheet{display:flex;flex-wrap:wrap;gap:6mm;padding:8mm;justify-content:flex-start}
+    .pc{width:90mm;height:58mm;background:#fff;border:1px dashed #cbb;border-radius:3mm;padding:4mm;display:grid;grid-template-columns:1fr 34mm;gap:3mm;position:relative;overflow:hidden;break-inside:avoid}
+    .pc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2mm;background:linear-gradient(90deg,#1D5CC8 20%,#FFB800 0 40%,#22A046 0 60%,#FF7814 0 80%,#EC2882 0)}
+    .pc .l{display:flex;flex-direction:column;gap:1.2mm}
+    .pc .brand{display:flex;align-items:center;gap:2mm}
+    .pc .brand img{width:12mm;height:12mm;border-radius:50%}
+    .pc .brand b{font-size:4.2mm;line-height:1.05}
+    .pc .brand small{display:block;font-size:2.3mm;color:var(--muted);font-weight:500}
+    .pc .t{font-size:3.3mm;font-weight:800;color:var(--orange);margin-top:1mm}
+    .pc ol{margin:0;padding-left:4mm;font-size:2.4mm;color:#5E4B3B;line-height:1.45}
+    .pc .slots{display:flex;gap:2mm;margin-top:auto}
+    .pc .slot{width:10mm;height:12mm;border:.3mm dashed var(--pink);border-radius:1mm;font-size:1.9mm;color:var(--pink);display:grid;place-items:center;text-align:center}
+    .qrbox{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1mm}
+    .qrbox svg{width:32mm;height:32mm}
+    .code{font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:3mm;letter-spacing:.2mm}
+    .merchant{font-size:2.1mm;color:var(--muted);text-align:center}
+    .st{width:30mm;height:38mm;background:#fff;padding:1.4mm;display:flex;break-inside:avoid;border:1.2mm dotted #F5B6D4;border-radius:1mm}
+    .st .in{border:.4mm solid var(--pink);border-radius:1mm;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:1mm}
+    .st .top{display:flex;align-items:center;gap:1mm;font-size:2.2mm;font-weight:800;color:var(--pink)}
+    .st .top img{width:4.5mm;height:4.5mm;border-radius:50%}
+    .st svg{width:19mm;height:19mm}
+    .st .code{font-size:2.2mm}
+    .st .pts{font-size:2.2mm;font-weight:800;color:var(--green)}
+    @media print{
+      header,.msg{display:none}
+      body{background:#fff}
+      .sheet{padding:0;gap:4mm}
+      @page{size:A4;margin:8mm}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="assets/logo-circle.png" alt="SMILE">
+    <h1>Postcard &amp; Stamp QR codes</h1>
+    <label>Admin key<input id="key" type="password" placeholder="ADMIN_KEY from Code.gs"></label>
+    <label>Type<select id="type"><option value="postcard">Postcards</option><option value="stamp">Stamps</option></select></label>
+    <label>Status<select id="status"><option value="unused">Unused</option><option value="all">All</option></select></label>
+    <label>Merchant id<input id="merchant" placeholder="e.g. smile-hq" size="10"></label>
+    <button id="load">Load codes</button>
+    <button id="demo" class="alt">Demo codes</button>
+    <button id="print" class="alt">Print</button>
+  </header>
+  <p class="msg" id="msg">Enter your admin key and load the codes created with <b>generateSampleCodes()</b> or the SMILE menu in the sheet. Each QR opens the SMILE app and validates the code.</p>
+  <div class="sheet" id="sheet"></div>
+
+  <script src="config.js"></script>
+  <script src="vendor/qrcode.min.js"></script>
+  <script>
+  (() => {
+    const API = ((window.SMILE_CONFIG || {}).API_URL || '').trim();
+    const appUrl = new URL('./', location.href).href;
+    const $ = s => document.querySelector(s);
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    try { $('#key').value = sessionStorage.getItem('smileAdminKey') || ''; } catch {}
+    function qrSvg(text) { const q = qrcode(0, 'M'); q.addData(text); q.make(); return q.createSvgTag({ cellSize: 4, margin: 0, scalable: true }); }
+    function postcard(c) {
+      return `<div class="pc"><div class="l">
+        <div class="brand"><img src="assets/logo-circle.png" alt=""><b>SMILE Postcard<small>See More of Iloilo's Landmarks and Events</small></b></div>
+        <div class="t">Scan to check in · 1 postcard = 1 check-in</div>
+        <ol><li>Take a proof photo at the place</li><li>Scan this QR in the SMILE app</li><li>Add 2 SMILE Stamps for +5 pts each</li></ol>
+        <div class="slots"><div class="slot">STAMP<br>+5</div><div class="slot">STAMP<br>+5</div></div></div>
+        <div class="qrbox">${qrSvg(appUrl + '#redeem/' + c.code)}<span class="code">${esc(c.code)}</span><span class="merchant">${esc(c.merchant || c.merchantId || '')}</span></div></div>`;
+    }
+    function stamp(c) {
+      return `<div class="st"><div class="in"><span class="top"><img src="assets/logo-circle.png" alt="">SMILE STAMP</span>${qrSvg(appUrl + '#redeem/' + c.code)}<span class="code">${esc(c.code)}</span><span class="pts">+5 POINTS</span></div></div>`;
+    }
+    function render(list) {
+      $('#sheet').innerHTML = list.map(c => c.type === 'stamp' ? stamp(c) : postcard(c)).join('');
+      $('#msg').textContent = `${list.length} code(s) ready. Use Print (A4). Cut along the dashed lines.`;
+    }
+    $('#load').onclick = async () => {
+      if (!API) { $('#msg').textContent = 'Set API_URL in config.js first, or use Demo codes.'; return; }
+      const key = $('#key').value.trim(); try { sessionStorage.setItem('smileAdminKey', key); } catch {}
+      $('#msg').textContent = 'Loading…';
+      try {
+        const r = await (await fetch(API + '?' + new URLSearchParams({ action: 'codes', key, type: $('#type').value, status: $('#status').value, merchantId: $('#merchant').value.trim() }))).json();
+        if (!r.ok) { $('#msg').textContent = r.error || 'Could not load codes.'; return; }
+        render(r.codes);
+      } catch (e) { $('#msg').textContent = 'Network error: ' + e.message; }
+    };
+    $('#demo').onclick = () => {
+      const t = $('#type').value, n = t === 'stamp' ? 40 : 20, p = t === 'stamp' ? 'ST' : 'PC';
+      render(Array.from({ length: n }, (_, i) => ({ code: `${p}-DEMO${String(i + 1).padStart(2, '0')}`, type: t, merchant: 'Demo' })));
+    };
+    $('#print').onclick = () => print();
+  })();
+  </script>
+</body>
+</html>

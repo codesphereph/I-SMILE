@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SMILE - See More of Iloilo's Landmarks and Events</title>
+  <meta name="description" content="SMILE: See More of Iloilo's Landmarks and Events. Explore landmarks, food, shops, festivals and places to stay. Check in with SMILE Postcards, add stamps, shop from local nano entrepreneurs and rank up from Class E to Class SSS.">
+  <meta name="theme-color" content="#FFB000">
+  <meta name="application-name" content="SMILE">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="SMILE">
+  <meta property="og:title" content="SMILE - See More of Iloilo's Landmarks and Events">
+  <meta property="og:description" content="Explore Iloilo, check in with SMILE Postcards, shop local and rank up to Class SSS.">
+  <meta property="og:image" content="assets/hero.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/hero.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ============ SPLASH ============ -->
+  <div id="splash" class="splash" aria-hidden="true">
+    <div class="splash-burst"></div>
+    <div class="splash-logo">
+      <svg class="splash-ring" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="56" pathLength="100" class="r r1"/><circle cx="60" cy="60" r="56" pathLength="100" class="r r2"/>
+        <circle cx="60" cy="60" r="56" pathLength="100" class="r r3"/><circle cx="60" cy="60" r="56" pathLength="100" class="r r4"/>
+        <circle cx="60" cy="60" r="56" pathLength="100" class="r r5"/>
+      </svg>
+      <img src="assets/logo-circle.png" alt="" width="220" height="220">
+    </div>
+    <p class="splash-tag"><span>See</span> <span>More</span> <span>of</span> <span>Iloilo's</span><br><span>Landmarks</span> <span>and</span> <span>Events</span></p>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="topbar">
+    <a href="#home" class="brand" aria-label="SMILE home">
+      <img src="assets/logo-circle.png" alt="SMILE logo" class="brand-logo" width="44" height="44">
+      <span class="brand-text"><strong>SMILE</strong><small>See More of Iloilo's Landmarks and Events</small></span>
+    </a>
+    <nav class="topnav" aria-label="Main">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#explore/landmarks" data-nav="explore">Explore</a>
+      <a href="#map" data-nav="map">Map</a>
+      <a href="#market" data-nav="market">Shop &amp; Services</a>
+      <a href="#challenges" data-nav="challenges">Challenges</a>
+      <a href="#rank" data-nav="rank">Rank</a>
+    </nav>
+    <button class="cam-top" type="button" data-camera aria-label="Take photo"><svg class="ic"><use href="#i-camera"/></svg><span>Take Photo</span></button>
+    <button class="icon-btn cart-btn" type="button" data-open-cart aria-label="Cart"><svg class="ic"><use href="#i-cart"/></svg><b class="cart-count" hidden>0</b></button>
+    <button class="points-pill" id="pointsPill" type="button" aria-label="Your rank and points">
+      <span class="rank-chip" id="rankChip">E</span> <span id="pointsValue">0</span><span class="pts-label"> pts</span>
+    </button>
+  </header>
+
+  <main id="app">
+    <!-- ============ HOME ============ -->
+    <section id="view-home" class="view" data-view="home">
+      <div class="landing">
+        <div class="landing-bg" aria-hidden="true"></div>
+        <div class="landing-grid">
+          <div class="poster">
+            <img src="assets/hero.jpg" srcset="assets/hero-sm.jpg 512w, assets/hero.jpg 1024w" sizes="(max-width: 860px) 100vw, 560px"
+                 alt="SMILE, See More of Iloilo's Landmarks and Events: Dinagyang Festival, Iloilo Provincial Capitol, Miag-ao Church, Jaro Cathedral, Iloilo Esplanade, and batchoy, pancit Molo, chicken inasal and seafood"
+                 width="1024" height="1536" fetchpriority="high">
+            <a class="hs" style="left:3.7%;top:22%;width:19%;height:5%" href="#place/ev-dinagyang" aria-label="Dinagyang Festival"></a>
+            <a class="hs" style="left:57%;top:6%;width:41%;height:22%" href="#place/lm-capitol" aria-label="Iloilo Provincial Capitol"></a>
+            <a class="hs" style="left:3.7%;top:58.2%;width:21.3%;height:4.6%" href="#place/lm-miagao" aria-label="Miag-ao Church"></a>
+            <a class="hs" style="left:79.9%;top:60.4%;width:18.3%;height:4%" href="#place/lm-jaro" aria-label="Jaro Cathedral"></a>
+            <a class="hs" style="left:72%;top:69.6%;width:21%;height:4.2%" href="#place/lm-esplanade" aria-label="Iloilo Esplanade"></a>
+            <a class="hs" style="left:4%;top:82.8%;width:14.8%;height:4%" href="#place/rs-batchoy" aria-label="Batchoy"></a>
+            <a class="hs" style="left:30.8%;top:87%;width:17.1%;height:4.2%" href="#explore/restaurants/molo" aria-label="Pancit Molo"></a>
+            <a class="hs" style="left:55.6%;top:85.4%;width:19.5%;height:4.6%" href="#explore/restaurants/chicken" aria-label="Chicken Inasal"></a>
+            <a class="hs" style="left:84.5%;top:87%;width:13.9%;height:4.2%" href="#explore/restaurants/seafood" aria-label="Seafoods"></a>
+          </div>
+          <div class="landing-panel">
+            <img src="assets/logo-circle.png" alt="SMILE logo" class="hero-logo" width="88" height="88">
+            <span class="eyebrow">Iloilo City · Province of Iloilo</span>
+            <h1>SMILE <span class="dash">-</span> <span class="sub">See More of Iloilo's Landmarks and Events</span></h1>
+            <p class="lead">Explore, check in with a <b>SMILE Postcard</b>, collect stamps, shop from local nano entrepreneurs and rank up to <b>Class SSS</b>.</p>
+            <div class="hero-cta">
+              <a href="#explore/landmarks" class="btn btn-primary"><svg class="ic"><use href="#i-compass"/></svg>Start exploring</a>
+              <button type="button" class="btn btn-green" data-checkin-start><svg class="ic"><use href="#i-qr"/></svg>Check in</button>
+              <button type="button" class="btn btn-ghost" data-camera><svg class="ic"><use href="#i-camera"/></svg>Take Photo</button>
+            </div>
+            <div class="quick" id="quickTiles"></div>
+            <a class="rank-strip card" href="#rank" id="homeRank"></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="section-head"><span class="pill">How check-in works</span><h2>Postcard + stamps = points</h2></div>
+        <div class="steps4">
+          <div class="step card"><span class="step-ic" style="--c:var(--c-shops)"><svg class="ic"><use href="#i-store"/></svg></span><b>1. Buy a SMILE Postcard</b><small>From any SMILE Merchant. Each has its own QR code.</small></div>
+          <div class="step card"><span class="step-ic" style="--c:var(--c-landmarks)"><svg class="ic"><use href="#i-camera"/></svg></span><b>2. Snap your proof</b><small>Take a photo at the place.</small></div>
+          <div class="step card"><span class="step-ic" style="--c:var(--green)"><svg class="ic"><use href="#i-qr"/></svg></span><b>3. Scan the postcard</b><small>One postcard = one check-in.</small></div>
+          <div class="step card"><span class="step-ic" style="--c:var(--s-pink)"><svg class="ic"><use href="#i-stamp"/></svg></span><b>4. Add 2 stamps</b><small>+5 points each, +10 per postcard.</small></div>
+        </div>
+
+        <div class="section-head row-head"><div><span class="pill pill-pink">Challenges</span><h2>Take on a challenge</h2></div><a href="#challenges" class="link">See all <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+        <div class="challenge-grid" id="homeChallenges"></div>
+
+        <div class="section-head row-head"><div><span class="pill pill-green">Shop &amp; Services</span><h2>Support Iloilo's nano entrepreneurs</h2></div><a href="#market" class="link">Open shop <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+        <div class="product-grid" id="homeProducts"></div>
+      </div>
+    </section>
+
+    <!-- ============ EXPLORE ============ -->
+    <section id="view-explore" class="view" data-view="explore" hidden>
+      <div class="wrap">
+        <div class="section-head row-head"><div><span class="pill">Explore</span><h2 id="exploreTitle">Landmarks</h2></div>
+          <a href="#map" class="btn btn-ghost btn-sm"><svg class="ic"><use href="#i-map"/></svg>Map view</a></div>
+        <div class="tabs" role="tablist" id="catTabs"></div>
+        <label class="search"><svg class="ic"><use href="#i-search"/></svg><input type="search" id="searchInput" placeholder="Search places, events, hotels, food…" autocomplete="off"></label>
+        <div class="place-grid" id="placeGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ MAP ============ -->
+    <section id="view-map" class="view" data-view="map" hidden>
+      <div class="map-layout">
+        <div class="map-frame-wrap">
+          <iframe id="bigMap" title="Google Map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <div class="map-card card" id="mapCard" hidden></div>
+        </div>
+        <aside class="map-side">
+          <div class="tabs small" id="mapTabs"></div>
+          <label class="search"><svg class="ic"><use href="#i-search"/></svg><input type="search" id="mapSearch" placeholder="Search on the map…" autocomplete="off"></label>
+          <div class="map-list" id="mapList"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ MARKET ============ -->
+    <section id="view-market" class="view" data-view="market" hidden>
+      <div class="wrap">
+        <div class="section-head"><span class="pill pill-green">Shop &amp; Services</span><h2>Local merch, delivered. Local talent, booked.</h2>
+          <p class="muted lead">Souvenir shirts and novelties from Iloilo's nano entrepreneurs, delivered to your location, plus barbers, massage therapists, emcees and comedians you can book.</p></div>
+        <div class="tabs" id="marketTabs" role="tablist">
+          <button class="tab" data-mtab="merch" role="tab"><svg class="ic"><use href="#i-bag"/></svg>Merchandise</button>
+          <button class="tab" data-mtab="services" role="tab"><svg class="ic"><use href="#i-sparkles"/></svg>Services</button>
+          <button class="tab" data-mtab="merchants" role="tab"><svg class="ic"><use href="#i-postcard"/></svg>Postcard Merchants</button>
+          <button class="tab" data-mtab="orders" role="tab"><svg class="ic"><use href="#i-receipt"/></svg>My Orders</button>
+        </div>
+        <div id="marketBody"></div>
+      </div>
+    </section>
+
+    <!-- ============ CHALLENGES ============ -->
+    <section id="view-challenges" class="view" data-view="challenges" hidden>
+      <div class="wrap">
+        <div class="section-head"><span class="pill pill-pink">Challenges</span><h2>Visit, snap, stamp, earn bonus points</h2>
+          <p class="muted lead">Finish a challenge to earn its bonus points instantly. Bonus points help you rank up faster.</p></div>
+        <div class="challenge-grid big" id="challengeGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ RANK ============ -->
+    <section id="view-rank" class="view" data-view="rank" hidden>
+      <div class="wrap">
+        <div class="section-head"><span class="pill">Rank &amp; Passport</span><h2>Your Iloilo passport</h2></div>
+        <div class="rank-hero card" id="rankHero"></div>
+        <div class="row-head h3row"><h3 class="h3">My postcards</h3><button type="button" class="btn btn-ghost btn-sm" data-scan-stamp><svg class="ic"><use href="#i-stamp"/></svg>Add a stamp</button></div>
+        <div class="postcard-grid" id="postcardGrid"></div>
+        <h3 class="h3">Rank ladder</h3>
+        <div class="ladder" id="rankLadder"></div>
+        <h3 class="h3">Badges</h3>
+        <div class="badge-grid" id="badgeGrid"></div>
+        <div class="row-head h3row"><h3 class="h3">Top explorers</h3><a href="#challenges" class="link">Challenges <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+        <ol class="leaderboard card" id="leaderboard"><li class="muted">Loading…</li></ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="assets/logo-circle.png" alt="" width="28" height="28">
+    <span>SMILE · See More of Iloilo's Landmarks and Events</span>
+    <button type="button" class="link" id="installLink" hidden>Install app</button>
+  </footer>
+
+  <nav class="bottomnav" aria-label="Main mobile">
+    <a href="#home" data-nav="home"><svg class="ic"><use href="#i-home"/></svg>Home</a>
+    <a href="#explore/landmarks" data-nav="explore"><svg class="ic"><use href="#i-compass"/></svg>Explore</a>
+    <button type="button" class="cam-fab" data-checkin-start aria-label="Check in"><svg class="ic"><use href="#i-qr"/></svg></button>
+    <a href="#market" data-nav="market"><svg class="ic"><use href="#i-store"/></svg>Shop</a>
+    <a href="#rank" data-nav="rank"><svg class="ic"><use href="#i-trophy"/></svg>Rank</a>
+  </nav>
+
+  <!-- ============ INSTALL BANNER ============ -->
+  <div class="install-banner" id="installBanner" role="dialog" aria-labelledby="installTitle" hidden>
+    <img src="icons/icon-96.png" alt="" width="56" height="56">
+    <div class="install-text"><strong id="installTitle">Install SMILE</strong><span id="installMsg">Add SMILE to your home screen.</span></div>
+    <div class="install-actions">
+      <button type="button" class="btn btn-primary btn-sm" id="installBtn">Install</button>
+      <button type="button" class="btn-x" id="installClose" aria-label="Dismiss"><svg class="ic"><use href="#i-x"/></svg></button>
+    </div>
+  </div>
+
+  <!-- ============ SHEET (place, check-in, cart, booking) ============ -->
+  <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden>
+    <button class="btn-x sheet-close" type="button" id="sheetClose" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button>
+    <div id="sheetBody"></div>
+  </div>
+
+  <!-- ============ CAMERA ============ -->
+  <div class="camera" id="camera" role="dialog" aria-modal="true" aria-label="Take photo" hidden>
+    <div class="cam-top-bar">
+      <button type="button" class="btn-x cam-btn" id="camClose" aria-label="Close camera"><svg class="ic"><use href="#i-x"/></svg></button>
+      <label class="cam-place"><svg class="ic"><use href="#i-pin"/></svg><select id="camPlace" aria-label="Tag a place"></select></label>
+      <button type="button" class="btn-x cam-btn" id="camFlip" aria-label="Switch camera"><svg class="ic"><use href="#i-flip"/></svg></button>
+    </div>
+    <div class="cam-mode" id="camMode" hidden>Proof photo for check-in</div>
+    <div class="cam-stage">
+      <video id="camVideo" playsinline muted autoplay></video>
+      <img id="camResult" alt="Your SMILE photo" hidden>
+      <div class="cam-frame-guide" aria-hidden="true">
+        <img src="assets/logo-circle.png" alt="">
+        <div class="cam-guide-band"><b id="camGuidePlace">Iloilo</b><small>SMILE · See More of Iloilo's Landmarks and Events</small></div>
+      </div>
+      <div class="cam-msg" id="camMsg" hidden></div>
+    </div>
+    <div class="cam-controls" id="camShootControls">
+      <label class="cam-side" title="Choose from gallery"><svg class="ic"><use href="#i-image"/></svg><input type="file" accept="image/*" id="camFile" hidden></label>
+      <button type="button" class="shutter" id="camShutter" aria-label="Take photo"></button>
+      <span class="cam-side cam-pts" id="camPts">+5</span>
+    </div>
+    <div class="cam-controls" id="camResultControls" hidden>
+      <button type="button" class="btn btn-ghost" id="camRetake"><svg class="ic"><use href="#i-flip"/></svg>Retake</button>
+      <button type="button" class="btn btn-ghost" id="camSave"><svg class="ic"><use href="#i-download"/></svg>Save</button>
+      <button type="button" class="btn btn-primary" id="camShare"><svg class="ic"><use href="#i-share"/></svg>Share</button>
+      <button type="button" class="btn btn-primary" id="camUse" hidden><svg class="ic"><use href="#i-check"/></svg>Use photo</button>
+    </div>
+    <input type="file" accept="image/*" capture="environment" id="camCapture" hidden>
+    <canvas id="camCanvas" hidden></canvas>
+  </div>
+
+  <!-- ============ QR SCANNER ============ -->
+  <div class="scanner" id="scanner" role="dialog" aria-modal="true" aria-labelledby="scanTitle" hidden>
+    <div class="cam-top-bar">
+      <button type="button" class="btn-x cam-btn" id="scanClose" aria-label="Close scanner"><svg class="ic"><use href="#i-x"/></svg></button>
+      <strong id="scanTitle">Scan postcard QR</strong>
+      <label class="btn-x cam-btn" title="Scan from a photo"><svg class="ic"><use href="#i-image"/></svg><input type="file" accept="image/*" id="scanFile" hidden></label>
+    </div>
+    <div class="scan-stage">
+      <video id="scanVideo" playsinline muted autoplay></video>
+      <div class="scan-box" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="scan-line"></span></div>
+      <p class="scan-hint" id="scanHint">Point the camera at the QR code on your SMILE Postcard</p>
+    </div>
+    <div class="scan-result" id="scanResult" hidden></div>
+    <form class="scan-manual" id="scanManual">
+      <input id="scanInput" placeholder="Or type the code, e.g. PC-ABC1234" autocapitalize="characters" autocomplete="off">
+      <button class="btn btn-primary btn-sm" type="submit">Check</button>
+    </form>
+    <canvas id="scanCanvas" hidden></canvas>
+  </div>
+
+  <!-- ============ RANK-UP ============ -->
+  <div class="rankup" id="rankup" role="dialog" aria-modal="true" aria-labelledby="rankupTitle" hidden>
+    <div class="rankup-card">
+      <div class="rankup-rays" aria-hidden="true"></div>
+      <span class="eyebrow">Rank up!</span>
+      <div class="rank-emblem xl" id="rankupEmblem">E</div>
+      <h3 id="rankupTitle">Class E</h3>
+      <p class="muted" id="rankupSub">Newcomer</p>
+      <button type="button" class="btn btn-primary" id="rankupClose">Awesome!</button>
+    </div>
+  </div>
+
+  <!-- ============ NAME DIALOG ============ -->
+  <dialog id="nameDialog" class="dialog">
+    <form method="dialog" id="nameForm">
+      <img src="assets/logo-circle.png" alt="" width="72" height="72">
+      <h3>What should we call you?</h3>
+      <p class="muted">Your nickname and rank appear on the Top Explorers board.</p>
+      <input id="nameInput" maxlength="40" required placeholder="e.g. Ilonggo Explorer">
+      <div class="row">
+        <button value="cancel" class="btn btn-ghost" type="button" id="nameCancel">Cancel</button>
+        <button value="ok" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <script src="icons.js"></script>
+  <script src="config.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="checkin.js"></script>
+  <script src="market.js"></script>
+</body>
+</html>
